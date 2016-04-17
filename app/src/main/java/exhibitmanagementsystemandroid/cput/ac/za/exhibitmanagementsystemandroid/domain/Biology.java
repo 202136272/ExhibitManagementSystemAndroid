@@ -1,16 +1,17 @@
 package exhibitmanagementsystemandroid.cput.ac.za.exhibitmanagementsystemandroid.domain;
 
-import org.hibernate.annotations.Table;
+
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 //
 /**
  * Created by Bonga on 4/1/2016.
  */
 @Entity
-@javax.persistence.Table(name="BIOLOGY")
+@Table(name="BIOLOGY")
 public class Biology extends Department implements Serializable {
     @Id
     @Column(name= "REFERENCE")

@@ -1,6 +1,6 @@
 package exhibitmanagementsystemandroid.cput.ac.za.exhibitmanagementsystemandroid.domain;
 
-import org.hibernate.annotations.Table;
+
 import java.io.Serializable;
 import javax.persistence.*;
 import javax.persistence.Id;
@@ -9,8 +9,9 @@ import javax.persistence.Id;
 /**
  * Created by Bonga on 4/2/2016.
  */
+
 @Entity
-@javax.persistence.Table(name="ADMINISTRATOR")
+@Table(name="ADMINISTRATOR")
 public class Administrator implements Serializable {
     @Id
     @Column(name= "PERSAL_NUMBER")

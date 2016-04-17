@@ -1,12 +1,28 @@
 package exhibitmanagementsystemandroid.cput.ac.za.exhibitmanagementsystemandroid.domain;
 
+import android.support.annotation.IdRes;
+
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * Created by Leonard Dukashe on 2016/03/28.
  */
-public class Person {
-    private String name;
-    private String surname;
+@Entity
+@Table(name = "PERSON")
+public class Person implements Serializable {
+    @Id
+    @Column(name = "PERSAL_NUMBER")
     private String persalNumber;
+    @Column(name = "NAME")
+    private String name;
+    @Column(name = "SURNAME")
+    private String surname;
+
 
     public String getName() {
         return name;

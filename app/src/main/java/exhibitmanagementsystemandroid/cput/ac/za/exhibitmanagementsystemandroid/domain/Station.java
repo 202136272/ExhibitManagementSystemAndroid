@@ -1,12 +1,22 @@
 package exhibitmanagementsystemandroid.cput.ac.za.exhibitmanagementsystemandroid.domain;
 
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * Created by Bonga on 3/30/2016.
  */
-public class Station {
-
-
+@Entity
+@Table(name = "STATION")
+public class Station implements Serializable{
+   @Id
+   @Column(name = "NAME")
     private String name;
+    @Column(name = "ADDRESS")
     private String address;
 
     public String getName() {

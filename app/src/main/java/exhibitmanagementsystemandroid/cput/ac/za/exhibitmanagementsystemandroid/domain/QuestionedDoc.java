@@ -1,12 +1,24 @@
 package exhibitmanagementsystemandroid.cput.ac.za.exhibitmanagementsystemandroid.domain;
 
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * Created by Bonga on 4/1/2016.
  */
-public class QuestionedDoc extends Department{
-    //
-    private String name;
+@Entity
+@Table(name = "QUESTIONED_DOC")
+public class QuestionedDoc extends Department implements Serializable{
+    @Id
+    @Column(name = "REFERENCE")
     private String reference;
+    @Column(name = "NAME")
+    private String name;
+    @Column(name = "DATE")
     private  String date;
    // boolean value;
 

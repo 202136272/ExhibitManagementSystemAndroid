@@ -1,13 +1,25 @@
 package exhibitmanagementsystemandroid.cput.ac.za.exhibitmanagementsystemandroid.domain;
 
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * Created by Leonard Dukashe on 2016/03/28.
  */
-public class Exhibit {
-
+@Entity
+@Table(name = "EXHIBIT")
+public class Exhibit implements Serializable {
+    @Id
+    @Column(name = "CAS_NUMBER")
     private String casNumber;
+    @Column(name = "SCENE_TYPE")
     private String sceneType; // ballistic, biology, chemistry, precious metals, questioned doc, scientific
+    @Column(name = "STATION")
     private String station;
+    @Column(name = "DESCRIPTION")
     private String description;
 
     public String getCasNumber() {

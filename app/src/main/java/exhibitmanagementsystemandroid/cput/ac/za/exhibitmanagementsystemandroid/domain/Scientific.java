@@ -1,18 +1,28 @@
 package exhibitmanagementsystemandroid.cput.ac.za.exhibitmanagementsystemandroid.domain;
 
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 /**
  * Created by Bonga on 4/1/2016.
  */
-public class Scientific extends Department {
+@Entity
+@Table(name = "SCIENTIFIC")
+public class Scientific extends Department implements Serializable {
+    @Column(name = "NAME")
     private String name;
-    private Double mass;
+    @Column(name = "MASS")
+    private String mass;
 
     @Override
     public String getName() {
         return name;
     }
 
-    public Double getMass() {
+    public String getMass() {
         return mass;
     }
 
@@ -30,14 +40,14 @@ public class Scientific extends Department {
 
         //Equivalent to setters
         private String name;
-        private Double mass;
+        private String mass;
 
 
         public Builder (String name) {
             this.name = name; //compalsury
         }
 
-        public Builder mass(Double mass) {
+        public Builder mass(String mass) {
             this.mass = mass;
             return this;
         }
