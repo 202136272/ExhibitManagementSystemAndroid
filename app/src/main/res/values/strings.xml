@@ -11,4 +11,13 @@
         For more information, see https://support.google.com/admob/answer/3052638
     <!- -->
     <string name="interstitial_ad_unit_id">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="title_activity_main22">Main22Activity</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_activity_person">ActivityPerson</string>
+    <string name="title_activity_activity_main_switch">ActivityMainSwitch</string>
+    <string name="button_send">ReadAll</string>
+    <string name="button_save">Save</string>
+    <string name="button_delete">Delete</string>
+    <string name="button_update">Update</string>
 </resources>

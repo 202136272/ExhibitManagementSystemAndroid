@@ -1,123 +1,123 @@
 package exhibitmanagementsystemandroid.cput.ac.za.exhibitmanagementsystemandroid;
 
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.InterstitialAd;
-
+import android.app.Activity;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
-    // Remove the below line after defining your own ad unit ID.
-    private static final String TOAST_TEXT = "Test ads are being shown. "
-            + "To show live ads, replace the ad unit ID in res/values/strings.xml with your own ad unit ID.";
+import junit.framework.Assert;
 
-    private static final int START_LEVEL = 1;
-    private int mLevel;
-    private Button mNextLevelButton;
-    private InterstitialAd mInterstitialAd;
-    private TextView mLevelTextView;
+import java.util.Set;
 
+import exhibitmanagementsystemandroid.cput.ac.za.exhibitmanagementsystemandroid.domain.Administrator;
+import exhibitmanagementsystemandroid.cput.ac.za.exhibitmanagementsystemandroid.factory.AdministratorFactory;
+import exhibitmanagementsystemandroid.cput.ac.za.exhibitmanagementsystemandroid.repository.AdministratorRepository;
+import exhibitmanagementsystemandroid.cput.ac.za.exhibitmanagementsystemandroid.repository.Impl.AdministratorRepositoryImpl;
+
+public class MainActivity extends Activity {
+    String msg = "Android : ";
+
+
+    private Long id;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Log.d(msg, "The onCreate() event");
 
-        // Create the next level button, which tries to show an interstitial when clicked.
-        mNextLevelButton = ((Button) findViewById(R.id.next_level_button));
-        mNextLevelButton.setEnabled(false);
-        mNextLevelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showInterstitial();
+        Button button_readAll = (Button) findViewById(R.id.button_send);
+        Button button_delete = (Button) findViewById(R.id.button_send);
+        Button button_update = (Button) findViewById(R.id.button_send);
+        Button button_save = (Button) findViewById(R.id.button_send);
+
+        button_readAll.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Do something in response to button clicko
+                AdministratorRepository repo = new AdministratorRepositoryImpl(getApplicationContext());
+                //READ ALL
+                Set<Administrator> administrators = repo.findAll();
+                String data = "";
+                for(Administrator admin : administrators){
+                    data += admin.getId() + "   " + admin.getName() + "\n";
+                }
+
+                for (int i=0; i < 2; i++) {
+
+                    Toast.makeText(getApplicationContext(), "SQL Lite Data\n" + data, Toast.LENGTH_LONG).show();
+
+                }
             }
         });
 
-        // Create the text view to show the level number.
-        mLevelTextView = (TextView) findViewById(R.id.level);
-        mLevel = START_LEVEL;
+        button_save.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Do something in response to button clicko
+                AdministratorRepository repo = new AdministratorRepositoryImpl(getApplicationContext());
 
-        // Create the InterstitialAd and set the adUnitId (defined in values/strings.xml).
-        mInterstitialAd = newInterstitialAd();
-        loadInterstitial();
+                Administrator adminSave = AdministratorFactory.CreateAdministrator("Admin", "USER","1");
+                //READ ALL
+                 Administrator savedEntity = repo.save(adminSave);
 
-        // Toasts the test ad message on the screen. Remove this after defining your own ad unit ID.
-        Toast.makeText(this, TOAST_TEXT, Toast.LENGTH_LONG).show();
-    }
+                String data = savedEntity.getId() + "  " + savedEntity.getName() + "  " + savedEntity.getSurname()
+                        + "   " + savedEntity.getPersalNumber();
 
+                for (int i=0; i < 2; i++) {
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
+                    Toast.makeText(getApplicationContext(), "SQL Lite Data\n" + data, Toast.LENGTH_LONG).show();
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+                }
 
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    private InterstitialAd newInterstitialAd() {
-        InterstitialAd interstitialAd = new InterstitialAd(this);
-        interstitialAd.setAdUnitId(getString(R.string.interstitial_ad_unit_id));
-        interstitialAd.setAdListener(new AdListener() {
-            @Override
-            public void onAdLoaded() {
-                mNextLevelButton.setEnabled(true);
-            }
-
-            @Override
-            public void onAdFailedToLoad(int errorCode) {
-                mNextLevelButton.setEnabled(true);
-            }
-
-            @Override
-            public void onAdClosed() {
-                // Proceed to the next level.
-                goToNextLevel();
+                id = savedEntity.getId();
             }
         });
-        return interstitialAd;
+
+        button_delete.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Do something in response to button clicko
+                AdministratorRepository repo = new AdministratorRepositoryImpl(getApplicationContext());
+
+                Administrator deletedEntity = repo.findById(id);
+
+                String data = deletedEntity.getId() + "  " + deletedEntity.getName() + "  " + deletedEntity.getSurname()
+                        + "   " + deletedEntity.getPersalNumber();
+
+                for (int i=0; i < 2; i++) {
+
+                    Toast.makeText(getApplicationContext(), "SQL Lite Data\n" + data, Toast.LENGTH_LONG).show();
+
+                }
+
+            }
+        });
+
+        button_update.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Do something in response to button clicko
+                AdministratorRepository repo = new AdministratorRepositoryImpl(getApplicationContext());
+                //READ ALL
+                Set<Administrator> administrators = repo.findAll();
+                String data = "";
+                for(Administrator admin : administrators){
+                    data += admin.getId() + "   " + admin.getName() + "\n";
+                }
+
+                for (int i=0; i < 2; i++) {
+
+                    Toast.makeText(getApplicationContext(), "SQL Lite Data\n" + data, Toast.LENGTH_LONG).show();
+
+                }
+            }
+        });
+
+
+
+
     }
 
-    private void showInterstitial() {
-        // Show the ad if it's ready. Otherwise toast and reload the ad.
-        if (mInterstitialAd != null && mInterstitialAd.isLoaded()) {
-            mInterstitialAd.show();
-        } else {
-            Toast.makeText(this, "Ad did not load", Toast.LENGTH_SHORT).show();
-            goToNextLevel();
-        }
-    }
-
-    private void loadInterstitial() {
-        // Disable the next level button and load the ad.
-        mNextLevelButton.setEnabled(false);
-        AdRequest adRequest = new AdRequest.Builder()
-                .setRequestAgent("android_studio:ad_template").build();
-        mInterstitialAd.loadAd(adRequest);
-    }
-
-    private void goToNextLevel() {
-        // Show the next level and reload the ad to prepare for the level after.
-        mLevelTextView.setText("Level " + (++mLevel));
-        mInterstitialAd = newInterstitialAd();
-        loadInterstitial();
-    }
 }
