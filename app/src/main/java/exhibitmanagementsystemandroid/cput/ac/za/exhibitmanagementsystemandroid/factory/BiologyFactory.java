@@ -11,7 +11,8 @@ public class BiologyFactory {
 
     public static Biology getBiology(String name, String reference, String type)
     {
-        Biology myBiology = new Biology.Builder(name)
+        Biology myBiology = new Biology.Builder()
+                .name(name)
                 .reference(reference)
                 .type(type)
                 .build();

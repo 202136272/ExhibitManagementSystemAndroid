@@ -7,11 +7,10 @@ import junit.framework.Assert;
 
 import java.util.Set;
 
-import exhibitmanagementsystemandroid.cput.ac.za.exhibitmanagementsystemandroid.domain.Administrator;
 import exhibitmanagementsystemandroid.cput.ac.za.exhibitmanagementsystemandroid.domain.Ballistic;
 import exhibitmanagementsystemandroid.cput.ac.za.exhibitmanagementsystemandroid.factory.BallisticFactory;
-import exhibitmanagementsystemandroid.cput.ac.za.exhibitmanagementsystemandroid.repository.Impl.BallisticRepository;
-import exhibitmanagementsystemandroid.cput.ac.za.exhibitmanagementsystemandroid.repository.Impl.BallisticRepositoryImpl;
+import exhibitmanagementsystemandroid.cput.ac.za.exhibitmanagementsystemandroid.repository.Docs.BallisticRepository;
+import exhibitmanagementsystemandroid.cput.ac.za.exhibitmanagementsystemandroid.repository.Docs.Impl.BallisticRepositoryImpl;
 
 /**
  * Created by Bonga on 4/23/2016.
@@ -24,17 +23,12 @@ public class BallisticRepositoryTest extends AndroidTestCase {
     public void testCreateReadUpdateDelete() throws Exception {
 
         BallisticRepository repo = new BallisticRepositoryImpl(this.getContext());
+
         // CREATE
-        Ballistic createEntity = BallisticFactory.CreateBallistic("Bal", "23", "cad");
-
+        Ballistic createEntity = BallisticFactory.CreateBallistic("Bonga", "23", "cad");
         Ballistic insertedEntity = repo.save(createEntity);
-
         id = insertedEntity.getId();
         Assert.assertNotNull(TAG + " CREATE", insertedEntity);
-
-        System.out.println(insertedEntity.getId() + " " + insertedEntity.getName());
-        System.out.println("The ID is: " + id);
-
 
        //READ ENTITY
         Ballistic entity = repo.findById(id);
@@ -49,7 +43,6 @@ public class BallisticRepositoryTest extends AndroidTestCase {
                 .copy(entity)
                 .name("Bonga")
                 .build();
-
         repo.update(updateEntity);
         Ballistic newEntity = repo.findById(id);
         Assert.assertEquals(TAG + " UPDATE ENTITY", "Bonga", newEntity.getName());

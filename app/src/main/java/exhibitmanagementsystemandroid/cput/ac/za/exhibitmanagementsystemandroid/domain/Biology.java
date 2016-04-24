@@ -10,46 +10,32 @@ import javax.persistence.Table;
 /**
  * Created by Bonga on 4/1/2016.
  */
-@Entity
-@Table(name="BIOLOGY")
+
 public class Biology extends Department implements Serializable {
-    @Id
-    @Column(name= "REFERENCE")
+   private Long id;
     private String reference;
-    @Column(name= "NAME")
     private String name;
-    @Column(name= "TYPE")
     private String type;
+
+    public Long getId() {
+        return id;
+    }
 
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getReference() {
         return reference;
     }
 
-    public void setReference(String reference) {
-        this.reference = reference;
-    }
-
     public String getType() {
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
-
-
     public Biology(Builder builder) {
 
-
+        id = builder.id;
         name = builder.name;
         reference = builder.reference;
         type = builder.type;
@@ -63,11 +49,16 @@ public class Biology extends Department implements Serializable {
         private String name;
         private String reference;
         private String type;
+        public Long id;
 
+        public Builder id(Long id) {
+            this.id = id; //compalsury
+            return  this;
+        }
 
-
-        public Builder (String name) {
-            this.name = name; //compalsury
+        public Builder name(String name) {
+            this.name = name;
+            return this;
         }
 
         public Builder reference(String reference) {
@@ -79,8 +70,6 @@ public class Biology extends Department implements Serializable {
             this.type = type;
             return this;
         }
-
-
 
         public Builder copy(Biology biology){
             this.name = biology.getName();

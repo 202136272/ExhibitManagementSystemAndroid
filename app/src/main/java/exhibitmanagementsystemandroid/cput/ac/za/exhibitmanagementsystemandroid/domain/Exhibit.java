@@ -9,18 +9,17 @@ import javax.persistence.Table;
 /**
  * Created by Leonard Dukashe on 2016/03/28.
  */
-@Entity
-@Table(name = "EXHIBIT")
+
 public class Exhibit implements Serializable {
-    @Id
-    @Column(name = "CAS_NUMBER")
+    private Long id;
     private String casNumber;
-    @Column(name = "SCENE_TYPE")
     private String sceneType; // ballistic, biology, chemistry, precious metals, questioned doc, scientific
-    @Column(name = "STATION")
     private String station;
-    @Column(name = "DESCRIPTION")
     private String description;
+
+    public Long getId() {
+        return id;
+    }
 
     public String getCasNumber() {
         return casNumber;
@@ -40,6 +39,7 @@ public class Exhibit implements Serializable {
 
     public Exhibit(Builder builder) {
 
+        id = builder.id;
         casNumber = builder.casNumber;
         station = builder.station;
         description = builder.description;
@@ -51,14 +51,20 @@ public class Exhibit implements Serializable {
     public static class Builder {
 
         //Equivalent to setters
+        private Long id;
         private String casNumber;
         private String station;
         private String description;
         private String sceneType;
 
+        public Builder id(Long id) {
+            this.id = id;//compalsury
+            return this;
+        }
 
-        public Builder (String casNumber) {
-            this.casNumber = casNumber; //compalsury
+        public Builder casNumber(String casNumber) {
+            this.casNumber = casNumber;
+            return this;
         }
 
         public Builder station(String station) {
@@ -79,6 +85,7 @@ public class Exhibit implements Serializable {
 
 
         public Builder copy(Exhibit exhibit){
+            this.id = exhibit.getId();
             this.casNumber = exhibit.getCasNumber();
             this.station = exhibit.getStation();
             this.description = exhibit.getDescription();

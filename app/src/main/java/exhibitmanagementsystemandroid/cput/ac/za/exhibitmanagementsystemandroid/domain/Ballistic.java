@@ -11,38 +11,30 @@ import javax.persistence.Id;
  */
 
 
-public class Ballistic extends Department implements Serializable{
+public class Ballistic implements Serializable{
 
     private Long id;
     private String reference;
     private String name;
     private String type;
 
+
+    public Long getId() {
+        return id;
+    }
     public String getName() {
         return name;
     }
 
-
     public String getReference() {
         return reference;
-    }
-
-    public Long getId() {
-        return id;
     }
 
     public String getType() {
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
-
-
-
-        public Ballistic(Builder builder) {
+    public Ballistic(Builder builder) {
 
             id = builder.id;
             name = builder.name;
@@ -63,14 +55,11 @@ public class Ballistic extends Department implements Serializable{
 
             public Builder  id(Long id) {
                 this.id = id;
-
                 return this;
             }
             public Builder  name(String name)
-
             {
                 this.name = name;
-
                 return this;
             }
 
@@ -87,10 +76,10 @@ public class Ballistic extends Department implements Serializable{
 
 
             public Builder copy(Ballistic ballistic){
+                this.id = ballistic.getId();
                 this.name = ballistic.getName();
                 this.reference = ballistic.getReference();
                 this.type = ballistic.getType();
-
                 return this;
             }
             public Ballistic build() {
