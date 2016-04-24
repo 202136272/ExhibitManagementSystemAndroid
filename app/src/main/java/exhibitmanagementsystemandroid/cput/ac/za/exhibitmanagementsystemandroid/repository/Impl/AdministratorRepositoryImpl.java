@@ -107,7 +107,6 @@ public class AdministratorRepositoryImpl extends SQLiteOpenHelper implements Adm
 
         long id = db.insertOrThrow(TABLE_NAME, null, values);
 
-
         Administrator insertedEntity = new Administrator.Builder()
                 .copy(entity)
                 .id(new Long(id))

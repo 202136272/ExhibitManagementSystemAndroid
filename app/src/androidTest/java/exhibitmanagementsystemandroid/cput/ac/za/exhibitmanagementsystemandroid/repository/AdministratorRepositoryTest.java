@@ -42,7 +42,7 @@ public class AdministratorRepositoryTest extends AndroidTestCase{
         //UPDATE ENTITY
         Administrator updateEntity = new Administrator.Builder()
                 .copy(entity)
-                .surname("GADULDT")
+                .name("GADULDT")
                 .build();
 
         repo.update(updateEntity);

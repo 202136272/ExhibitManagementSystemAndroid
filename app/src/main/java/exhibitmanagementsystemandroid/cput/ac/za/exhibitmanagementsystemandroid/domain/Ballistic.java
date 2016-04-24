@@ -9,31 +9,26 @@ import javax.persistence.Id;
 /**
  * Created by Bonga on 4/1/2016.
  */
-@Entity
-@javax.persistence.Table(name="BALLISTIC")
+
+
 public class Ballistic extends Department implements Serializable{
-    @Id
-    @Column(name= "REFERENCE")
+
+    private Long id;
     private String reference;
-    @Column(name= "NAME")
     private String name;
-    @Column(name= "TYPE")
     private String type;
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getReference() {
         return reference;
     }
 
-    public void setReference(String reference) {
-        this.reference = reference;
+    public Long getId() {
+        return id;
     }
 
     public String getType() {
@@ -49,7 +44,7 @@ public class Ballistic extends Department implements Serializable{
 
         public Ballistic(Builder builder) {
 
-
+            id = builder.id;
             name = builder.name;
             reference = builder.reference;
             type = builder.type;
@@ -60,14 +55,23 @@ public class Ballistic extends Department implements Serializable{
         public static class Builder {
 
             //Equivalent to setters
+            private Long id;
             private String name;
             private String reference;
             private String type;
 
 
+            public Builder  id(Long id) {
+                this.id = id;
 
-            public Builder (String name) {
-                this.name = name; //compalsury
+                return this;
+            }
+            public Builder  name(String name)
+
+            {
+                this.name = name;
+
+                return this;
             }
 
             public Builder reference(String reference) {
