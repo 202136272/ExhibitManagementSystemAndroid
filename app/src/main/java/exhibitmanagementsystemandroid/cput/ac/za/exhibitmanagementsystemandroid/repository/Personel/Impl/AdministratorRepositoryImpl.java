@@ -149,7 +149,6 @@ public class AdministratorRepositoryImpl extends SQLiteOpenHelper implements Adm
     @Override
     public Set<Administrator> findAll() {
 
-
         SQLiteDatabase db = this.getReadableDatabase();
         Set<Administrator> admin = new HashSet<>();
         open();

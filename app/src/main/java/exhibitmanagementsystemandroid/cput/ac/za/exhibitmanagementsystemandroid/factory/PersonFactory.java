@@ -10,7 +10,8 @@ public class PersonFactory {
 
     public static Person getPerson(String name, String surname, String persalNumber)
     {
-        Person myPerson = new Person.Builder(name)
+        Person myPerson = new Person.Builder()
+                .name(name)
                 .surname(surname)
                 .persalNumber(persalNumber)
                 .build();

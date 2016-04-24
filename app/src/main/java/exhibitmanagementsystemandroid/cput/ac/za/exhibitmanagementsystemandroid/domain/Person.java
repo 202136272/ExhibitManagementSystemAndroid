@@ -10,19 +10,20 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * Created by Leonard Dukashe on 2016/03/28.
+ * Created by Bonga on 2016/03/28.
  */
-@Entity
-@Table(name = "PERSON")
+
+
 public class Person implements Serializable {
-    @Id
-    @Column(name = "PERSAL_NUMBER")
+    private Long id;
     private String persalNumber;
-    @Column(name = "NAME")
     private String name;
-    @Column(name = "SURNAME")
     private String surname;
 
+
+    public Long getId() {
+        return id;
+    }
 
     public String getName() {
         return name;
@@ -39,7 +40,7 @@ public class Person implements Serializable {
 
     public Person(Builder builder) {
 
-
+        id = builder.id;
         name = builder.name;
         surname = builder.surname;
         persalNumber = builder.persalNumber;
@@ -50,14 +51,20 @@ public class Person implements Serializable {
     public static class Builder {
 
         //Equivalent to setters
+        private Long id;
         private String name;
         private String surname;
         private String persalNumber;
 
 
+        public Builder id(Long id) {
+            this.id = id;
+            return this;
+        }
 
-        public Builder (String name) {
-            this.name = name; //compalsury
+        public Builder name(String name) {
+            this.name = name;
+            return this;
         }
 
         public Builder surname(String surname) {
@@ -73,6 +80,7 @@ public class Person implements Serializable {
 
 
         public Builder copy(Person person){
+            this.id = person.getId();
             this.name = person.getName();
             this.surname = person.getSurname();
             this.persalNumber = person.getPersalNumber();
@@ -83,13 +91,6 @@ public class Person implements Serializable {
             return new Person(this);
         }
     }
-
-
-
-
-
-
-
 
 }
 

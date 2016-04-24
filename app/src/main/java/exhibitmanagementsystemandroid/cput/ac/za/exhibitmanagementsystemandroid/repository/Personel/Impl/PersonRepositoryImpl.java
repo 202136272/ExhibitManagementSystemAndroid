@@ -1,13 +1,18 @@
 package exhibitmanagementsystemandroid.cput.ac.za.exhibitmanagementsystemandroid.repository.Personel.Impl;
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import exhibitmanagementsystemandroid.cput.ac.za.exhibitmanagementsystemandroid.conf.databases.DBConstants;
+import exhibitmanagementsystemandroid.cput.ac.za.exhibitmanagementsystemandroid.domain.Administrator;
+import exhibitmanagementsystemandroid.cput.ac.za.exhibitmanagementsystemandroid.domain.Biology;
 import exhibitmanagementsystemandroid.cput.ac.za.exhibitmanagementsystemandroid.domain.Person;
 import exhibitmanagementsystemandroid.cput.ac.za.exhibitmanagementsystemandroid.repository.Personel.PersonRepository;
 
@@ -58,7 +63,31 @@ public class PersonRepositoryImpl extends SQLiteOpenHelper implements PersonRepo
 
     @Override
     public Person findById(Long id) {
-        return null;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(
+                TABLE_NAME,
+                new String[]{
+                        COLUMN_ID,
+                        COLUMN_NAME,
+                        COLUMN_PERSALNUMBER,
+                        COLUMN_SURNAME},
+                COLUMN_ID + " =? ",
+                new String[]{String.valueOf(id)},
+                null,
+                null,
+                null,
+                null);
+        if (cursor.moveToFirst()) {
+            final Person person = new Person.Builder()
+                    .id(cursor.getLong(cursor.getColumnIndex(COLUMN_ID)))
+                    .persalNumber(cursor.getString(cursor.getColumnIndex(COLUMN_PERSALNUMBER)))
+                    .name(cursor.getString(cursor.getColumnIndex(COLUMN_NAME)))
+                    .surname(cursor.getString(cursor.getColumnIndex(COLUMN_SURNAME)))
+                    .build();
+            return person;
+        } else {
+            return null;
+        }
     }
 
     @Override
@@ -68,21 +97,62 @@ public class PersonRepositoryImpl extends SQLiteOpenHelper implements PersonRepo
 
     @Override
     public Person update(Person entity) {
-        return null;
+
+        open();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_ID, entity.getId());
+        values.put(COLUMN_NAME, entity.getName());
+        values.put(COLUMN_SURNAME, entity.getSurname());
+        values.put(COLUMN_PERSALNUMBER, entity.getPersalNumber());
+
+        db.update(
+                TABLE_NAME,
+                values,
+                COLUMN_ID + " =? ",
+                new String[]{String.valueOf(entity.getId())}
+        );
+        return entity;
     }
 
     @Override
     public Person delete(Person entity) {
-        return null;
+        open();
+        db.delete(
+                TABLE_NAME,
+                COLUMN_ID + " =? ",
+                new String[]{String.valueOf(entity.getId())});
+        return entity;
     }
 
     @Override
     public Set<Person> findAll() {
-        return null;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Set<Person> admin = new HashSet<>();
+        open();
+        Cursor cursor = db.query(TABLE_NAME, null,null,null,null,null,null);
+        if (cursor.moveToFirst()) {
+            do {
+                final Person person = new Person.Builder()
+                        .id(cursor.getLong(cursor.getColumnIndex(COLUMN_ID)))
+                        .persalNumber(cursor.getString(cursor.getColumnIndex(COLUMN_PERSALNUMBER)))
+                        .name(cursor.getString(cursor.getColumnIndex(COLUMN_NAME)))
+                        .surname(cursor.getString(cursor.getColumnIndex(COLUMN_SURNAME)))
+                        .build();
+
+                admin.add(person);
+            } while (cursor.moveToNext());
+        }
+        return admin;
     }
+
+
 
     @Override
     public int deleteAll() {
-        return 0;
+        open();
+        int rowsDeleted = db.delete(TABLE_NAME,null,null);
+        close();
+        return rowsDeleted;
     }
 }
