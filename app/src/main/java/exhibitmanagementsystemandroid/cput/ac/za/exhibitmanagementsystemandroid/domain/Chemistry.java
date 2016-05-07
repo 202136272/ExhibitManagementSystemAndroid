@@ -10,19 +10,12 @@ import javax.persistence.Id;
  * Created by Bonga on 4/1/2016.
  */
 
-@Entity
-@javax.persistence.Table(name="CHEMISTRY")
 public class Chemistry extends Department implements Serializable{
-    @Id
-    @Column(name= "ID")
+
     private  String id;
-    @Column(name= "MASS")
     private  String mass;
-    @Column(name= "AMOUNT")
     private  String amount;
-    @Column(name= "TYPE")
     private String type;
-    @Column(name= "EFFECT")
     private String effect ;
 
     public String getId() {

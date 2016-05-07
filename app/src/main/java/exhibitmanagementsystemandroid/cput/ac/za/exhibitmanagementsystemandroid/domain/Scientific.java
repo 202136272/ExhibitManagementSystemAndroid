@@ -9,12 +9,8 @@ import javax.persistence.Table;
 /**
  * Created by Bonga on 4/1/2016.
  */
-@Entity
-@Table(name = "SCIENTIFIC")
 public class Scientific extends Department implements Serializable {
-    @Column(name = "NAME")
     private String name;
-    @Column(name = "MASS")
     private String mass;
 
     @Override

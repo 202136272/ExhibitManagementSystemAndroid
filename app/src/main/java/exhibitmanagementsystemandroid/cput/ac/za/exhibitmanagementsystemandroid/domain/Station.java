@@ -10,13 +10,9 @@ import javax.persistence.Table;
 /**
  * Created by Bonga on 3/30/2016.
  */
-@Entity
-@Table(name = "STATION")
 public class Station implements Serializable{
-   @Id
-   @Column(name = "NAME")
+
     private String name;
-    @Column(name = "ADDRESS")
     private String address;
 
     public String getName() {

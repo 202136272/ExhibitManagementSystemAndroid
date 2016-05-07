@@ -10,17 +10,10 @@ import javax.persistence.Table;
 /**
  * Created by Leonard Dukashe on 2016/03/28.
  */
-@Entity
-@Table(name = "INVESTIGATING_OFFICER" )
 public class InvestigatingOfficer implements Serializable {
-    @Id
-    @Column(name = "PERSAL_NUMBER")
     private String persalNumber;
-    @Column(name = "NAME")
     private String name;
-    @Column(name = "RANK")
     private String rank;
-    @Column(name = "STATION")
     private String station;
 
 

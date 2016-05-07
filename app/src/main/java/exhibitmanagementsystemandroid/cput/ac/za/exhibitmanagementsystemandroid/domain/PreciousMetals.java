@@ -10,17 +10,10 @@ import javax.persistence.Table;
 /**
  * Created by Bonga on 4/1/2016.
  */
-@Entity
-@Table(name = "PRECIOUS_METALS")
 public class PreciousMetals extends Department implements Serializable{
-    @Id
-    @Column(name = "DENSITY")
     private String density;
-    @Column(name = "MASS")
     private String mass;
-    @Column(name = "TYPE")
     private String type;
-    @Column(name = "MELTING_POINT")
     private  String meltingPoint;
 
     public String getMass() {
