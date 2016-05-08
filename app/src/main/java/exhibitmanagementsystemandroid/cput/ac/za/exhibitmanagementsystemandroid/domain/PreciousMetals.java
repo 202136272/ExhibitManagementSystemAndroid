@@ -5,7 +5,8 @@ import java.io.Serializable;
 /**
  * Created by Bonga on 4/1/2016.
  */
-public class PreciousMetals extends Department implements Serializable{
+public class PreciousMetals implements Serializable{
+    private Long id;
     private String density;
     private String mass;
     private String type;
@@ -27,10 +28,12 @@ public class PreciousMetals extends Department implements Serializable{
         return meltingPoint;
     }
 
-
+    public Long getId() {
+        return id;
+    }
 
     public PreciousMetals(Builder builder) {
-
+        id = builder.id;
         mass = builder.mass;
         type = builder.type;
         density = builder.density;
@@ -39,17 +42,21 @@ public class PreciousMetals extends Department implements Serializable{
 
 
     public static class Builder {
-
         //Equivalent to setters
+        private Long id;
         private String mass;
         private String type;
         private String density;
         private String meltingPoint;
 
+        public Builder id(Long id) {
+            this.id = id; //compalsury
+            return this;
+        }
 
-
-        public Builder (String mass) {
+        public Builder mass(String mass) {
             this.mass = mass; //compalsury
+            return this;
         }
 
         public Builder type(String type) {
@@ -69,16 +76,15 @@ public class PreciousMetals extends Department implements Serializable{
         }
 
         public Builder copy(PreciousMetals preciousMetals){
+            this.id = preciousMetals.getId();
             this.mass = preciousMetals.getMass();
             this.type = preciousMetals.getType();
             this.density = preciousMetals.getDensity();
             this.meltingPoint = preciousMetals.getMeltingPoint();
-
             return this;
         }
         public PreciousMetals build() {
             return new PreciousMetals(this);
         }
     }
-
 }
