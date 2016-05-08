@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Created by Bonga on 4/1/2016.
  */
 
-public class Biology extends Department implements Serializable {
+public class Biology implements Serializable {
    private Long id;
     private String reference;
     private String name;

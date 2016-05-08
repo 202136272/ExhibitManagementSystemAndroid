@@ -11,7 +11,8 @@ public class StationFactory {
 
     public static Station getStation(String name, String address)
     {
-        Station myStation = new Station.Builder(name)
+        Station myStation = new Station.Builder()
+                .name(name)
                 .address(address)
                 .build();
         return myStation;

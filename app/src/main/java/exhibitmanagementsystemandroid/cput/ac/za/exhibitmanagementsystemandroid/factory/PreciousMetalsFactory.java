@@ -10,7 +10,8 @@ public class PreciousMetalsFactory {
 
     public static PreciousMetals getPreciousMetals(String mass, String type, String density, String meltingPoint)
     {
-        PreciousMetals myPreciousMetals = new PreciousMetals.Builder(mass)
+        PreciousMetals myPreciousMetals = new PreciousMetals.Builder()
+                .mass(mass)
                 .type(type)
                 .density(density)
                 .meltingPoint(meltingPoint)

@@ -100,7 +100,6 @@ public class AdministratorRepositoryImpl extends SQLiteOpenHelper implements Adm
 
     @Override
     public Administrator save(Administrator entity) {
-
         open();
         ContentValues values = new ContentValues();
         values.put(COLUMN_ID, entity.getId());
@@ -157,9 +156,9 @@ public class AdministratorRepositoryImpl extends SQLiteOpenHelper implements Adm
             do {
                 final Administrator administrator = new Administrator.Builder()
                         .id(cursor.getLong(cursor.getColumnIndex(COLUMN_ID)))
-                        .persalNumber(cursor.getString(cursor.getColumnIndex(COLUMN_PERSALNUMBER)))
                         .name(cursor.getString(cursor.getColumnIndex(COLUMN_NAME)))
                         .surname(cursor.getString(cursor.getColumnIndex(COLUMN_SURNAMR)))
+                        .persalNumber(cursor.getString(cursor.getColumnIndex(COLUMN_PERSALNUMBER)))
                         .build();
 
                 admin.add(administrator);

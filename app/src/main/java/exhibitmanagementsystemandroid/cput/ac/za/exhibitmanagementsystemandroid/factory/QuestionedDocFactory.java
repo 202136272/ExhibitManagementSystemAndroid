@@ -11,7 +11,8 @@ public class QuestionedDocFactory {
 
     public static QuestionedDoc getQuestionedDoc(String name, String reference, String date)
     {
-        QuestionedDoc myQuestionedDoc = new QuestionedDoc.Builder(name)
+        QuestionedDoc myQuestionedDoc = new QuestionedDoc.Builder()
+                .name(name)
                 .reference(reference)
                 .date(date)
                 .build();

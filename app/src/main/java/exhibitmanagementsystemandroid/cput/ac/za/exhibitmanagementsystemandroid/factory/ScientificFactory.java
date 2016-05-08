@@ -9,7 +9,8 @@ import exhibitmanagementsystemandroid.cput.ac.za.exhibitmanagementsystemandroid.
 public class ScientificFactory {
 
     public static Scientific getScientific(String name, String mass) {
-        Scientific myScientific = new Scientific.Builder(name)
+        Scientific myScientific = new Scientific.Builder()
+                .name(name)
                 .mass(mass)
                 .build();
         return myScientific;

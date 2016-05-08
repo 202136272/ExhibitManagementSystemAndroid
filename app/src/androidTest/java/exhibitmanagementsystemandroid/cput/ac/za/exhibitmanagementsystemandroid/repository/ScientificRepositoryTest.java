@@ -1,5 +1,7 @@
 package exhibitmanagementsystemandroid.cput.ac.za.exhibitmanagementsystemandroid.repository;
 
+import android.test.AndroidTestCase;
+
 import junit.framework.Assert;
 
 import java.util.Set;
@@ -12,9 +14,9 @@ import exhibitmanagementsystemandroid.cput.ac.za.exhibitmanagementsystemandroid.
 /**
  * Created by Bonga on 4/29/2016.
  */
-public class ScientificRepositoryTest {
+public class ScientificRepositoryTest extends AndroidTestCase{
 
-   /* private static final String TAG ="ADMINISTRATOR TEST";
+   private static final String TAG ="ADMINISTRATOR TEST";
     private Long id;
 
     public void testCreateReadUpdateDelete() throws Exception {
@@ -53,6 +55,6 @@ public class ScientificRepositoryTest {
         repo.delete(updateEntity);
         Person deletedEntity = repo.findById(id);
         Assert.assertNull(TAG + " DELETE", deletedEntity);
-    }*/
+    }
 
 }

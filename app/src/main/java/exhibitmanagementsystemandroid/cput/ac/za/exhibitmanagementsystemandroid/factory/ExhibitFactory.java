@@ -8,7 +8,6 @@ import exhibitmanagementsystemandroid.cput.ac.za.exhibitmanagementsystemandroid.
  */
 public class ExhibitFactory {
 
-
     public static Exhibit getExhibit(String casNumber, String station, String description, String sceneType )
     {
         Exhibit myExhibit = new Exhibit.Builder()

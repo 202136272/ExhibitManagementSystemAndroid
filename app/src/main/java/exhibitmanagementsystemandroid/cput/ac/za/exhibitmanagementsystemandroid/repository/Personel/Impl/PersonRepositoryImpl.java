@@ -25,9 +25,9 @@ public class PersonRepositoryImpl extends SQLiteOpenHelper implements PersonRepo
     private SQLiteDatabase db;
 
     public static final String COLUMN_ID = "id";
-    public static final String COLUMN_PERSALNUMBER = "persalNumber";
     public static final String COLUMN_NAME = "name";
     public static final String COLUMN_SURNAME = " surname";
+    public static final String COLUMN_PERSALNUMBER = "persalNumber";
 
     public PersonRepositoryImpl(Context context) {
         super(context, DBConstants.DATABASE_NAME, null, DBConstants.DATABASE_VERSION);
@@ -36,9 +36,9 @@ public class PersonRepositoryImpl extends SQLiteOpenHelper implements PersonRepo
     private static final String DATABASE_CREATE = " CREATE TABLE "
             + TABLE_NAME + "("
             + COLUMN_ID + " INTEGER  PRIMARY KEY AUTOINCREMENT, "
-            + COLUMN_PERSALNUMBER + " TEXT  NOT NULL , "
             + COLUMN_NAME + " TEXT NOT NULL , "
-            + COLUMN_SURNAME + " TEXT NOT NULL)";
+            + COLUMN_SURNAME + " TEXT NOT NULL , "
+            + COLUMN_PERSALNUMBER + " TEXT  NOT NULL)";
 
     public void open() throws SQLException {
         db = this.getWritableDatabase();
@@ -69,8 +69,8 @@ public class PersonRepositoryImpl extends SQLiteOpenHelper implements PersonRepo
                 new String[]{
                         COLUMN_ID,
                         COLUMN_NAME,
-                        COLUMN_PERSALNUMBER,
-                        COLUMN_SURNAME},
+                        COLUMN_SURNAME,
+                        COLUMN_PERSALNUMBER},
                 COLUMN_ID + " =? ",
                 new String[]{String.valueOf(id)},
                 null,
@@ -80,9 +80,9 @@ public class PersonRepositoryImpl extends SQLiteOpenHelper implements PersonRepo
         if (cursor.moveToFirst()) {
             final Person person = new Person.Builder()
                     .id(cursor.getLong(cursor.getColumnIndex(COLUMN_ID)))
-                    .persalNumber(cursor.getString(cursor.getColumnIndex(COLUMN_PERSALNUMBER)))
                     .name(cursor.getString(cursor.getColumnIndex(COLUMN_NAME)))
                     .surname(cursor.getString(cursor.getColumnIndex(COLUMN_SURNAME)))
+                    .persalNumber(cursor.getString(cursor.getColumnIndex(COLUMN_PERSALNUMBER)))
                     .build();
             return person;
         } else {
@@ -92,7 +92,21 @@ public class PersonRepositoryImpl extends SQLiteOpenHelper implements PersonRepo
 
     @Override
     public Person save(Person entity) {
-        return null;
+        open();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_ID, entity.getId());
+        values.put(COLUMN_NAME, entity.getName());
+        values.put(COLUMN_SURNAME, entity.getSurname());
+        values.put(COLUMN_PERSALNUMBER, entity.getPersalNumber());
+
+        long id = db.insertOrThrow(TABLE_NAME, null, values);
+
+        Person insertedEntity = new Person.Builder()
+                .copy(entity)
+                .id(new Long(id))
+                .build();
+
+        return insertedEntity;
     }
 
     @Override
@@ -135,9 +149,9 @@ public class PersonRepositoryImpl extends SQLiteOpenHelper implements PersonRepo
             do {
                 final Person person = new Person.Builder()
                         .id(cursor.getLong(cursor.getColumnIndex(COLUMN_ID)))
-                        .persalNumber(cursor.getString(cursor.getColumnIndex(COLUMN_PERSALNUMBER)))
                         .name(cursor.getString(cursor.getColumnIndex(COLUMN_NAME)))
                         .surname(cursor.getString(cursor.getColumnIndex(COLUMN_SURNAME)))
+                        .persalNumber(cursor.getString(cursor.getColumnIndex(COLUMN_PERSALNUMBER)))
                         .build();
 
                 admin.add(person);
