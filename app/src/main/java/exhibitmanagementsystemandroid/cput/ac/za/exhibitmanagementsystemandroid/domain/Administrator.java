@@ -2,10 +2,6 @@ package exhibitmanagementsystemandroid.cput.ac.za.exhibitmanagementsystemandroid
 
 
 import java.io.Serializable;
-import javax.persistence.*;
-import javax.persistence.Id;
-
-
 /**
  * Created by Bonga on 4/2/2016.
  */
